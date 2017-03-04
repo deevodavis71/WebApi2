@@ -5,12 +5,16 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace WebApi2.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(
+                name: "WebApi2");
+
             migrationBuilder.CreateTable(
                 name: "Orders",
+                schema: "WebApi2",
                 columns: table => new
                 {
                     OrderId = table.Column<int>(nullable: false)
@@ -26,7 +30,8 @@ namespace WebApi2.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Orders");
+                name: "Orders",
+                schema: "WebApi2");
         }
     }
 }

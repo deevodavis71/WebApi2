@@ -3,15 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WebApi2_1.Data;
+using Microsoft.Extensions.Logging;
+using WebApi2_1.Data.Model;
 
 namespace WebApi2_1.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+        private readonly ILogger _logger;
+        private readonly CustomerContext _customerContext;
+
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<string> Get(ILogger<ValuesController> logger, CustomerContext context)
         {
             return new string[] { "value1", "value2" };
         }
@@ -20,6 +26,12 @@ namespace WebApi2_1.Controllers
         [HttpGet("{id}")]
         public string Get(int id)
         {
+            _logger.LogDebug("Called Get()");
+
+            //var context = new OrderContext();
+            _customerContext.Customers.Add(new Customer { Firstname = "Steve", Surname = "Davis" });
+            _customerContext.SaveChanges();
+
             return "value";
         }
 

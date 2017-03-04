@@ -8,12 +8,13 @@ using WebApi2.Data;
 namespace WebApi2.Migrations
 {
     [DbContext(typeof(OrderContext))]
-    [Migration("20170304112547_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20170304121649_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
+                .HasDefaultSchema("WebApi2")
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -26,7 +27,7 @@ namespace WebApi2.Migrations
 
                     b.HasKey("OrderId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders","WebApi2");
                 });
         }
     }
